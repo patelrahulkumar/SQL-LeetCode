@@ -1,6 +1,6 @@
 # 182. Duplicate Emails (SQL)
 
-## 📌 Problem Statement
+## Problem Statement
 
 Given a table `Person` with the following schema:
 
@@ -13,13 +13,13 @@ Given a table `Person` with the following schema:
 * Each row contains an email address.
 * Emails are guaranteed to be non-null.
 
-### 🎯 Task
+### Task
 
 Write a SQL query to find all **duplicate emails** (emails that appear more than once).
 
 ---
 
-## 🧠 Approach
+## Approach
 
 To solve this problem, we use:
 
@@ -29,7 +29,7 @@ To solve this problem, we use:
 
 ---
 
-## ✅ SQL Solution
+## SQL Solution
 
 ```sql
 SELECT email AS Email
@@ -40,7 +40,7 @@ HAVING COUNT(email) > 1;
 
 ---
 
-## ⚙️ Explanation
+## Explanation
 
 1. `GROUP BY email` groups all identical emails together.
 2. `COUNT(email)` calculates how many times each email appears.
@@ -48,7 +48,7 @@ HAVING COUNT(email) > 1;
 
 ---
 
-## 📊 Example
+## Example
 
 ### Input
 
@@ -66,7 +66,7 @@ HAVING COUNT(email) > 1;
 
 ---
 
-## 🔄 Alternative Solution (Self Join)
+## Alternative Solution (Self Join)
 
 ```sql
 SELECT DISTINCT p1.email AS Email
@@ -77,7 +77,7 @@ ON p1.email = p2.email AND p1.id <> p2.id;
 
 ---
 
-## 🧩 Key Concepts
+## Key Concepts
 
 * SQL Aggregation
 * GROUP BY
@@ -86,21 +86,21 @@ ON p1.email = p2.email AND p1.id <> p2.id;
 
 ---
 
-## 🚀 Complexity
+## Complexity
 
 * Time Complexity: O(n)
 * Space Complexity: O(n) (depends on grouping)
 
 ---
 
-## 📎 Notes
+## Notes
 
 * Preferred approach is **GROUP BY + HAVING** for clarity and performance.
 * Self join is less efficient but useful for conceptual understanding.
 
 ---
 
-## 🏁 Conclusion
+## Conclusion
 
 This is a fundamental SQL problem that tests your understanding of grouping and filtering aggregated data. It is commonly asked in interviews.
 

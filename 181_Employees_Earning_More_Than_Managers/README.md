@@ -1,6 +1,6 @@
 # 181. Employees Earning More Than Their Managers
 
-## 🧩 Problem Statement
+## Problem Statement
 
 Given an `Employee` table containing employee details, find all employees who earn more than their respective managers.
 
@@ -18,13 +18,13 @@ Given an `Employee` table containing employee details, find all employees who ea
 
 ---
 
-## 🎯 Objective
+## Objective
 
 Return the names of employees whose salary is strictly greater than their manager's salary.
 
 ---
 
-## 💡 Approach
+## Approach
 
 We use a **self join** on the Employee table:
 
@@ -35,7 +35,7 @@ We use a **self join** on the Employee table:
 
 ---
 
-## 🛠️ SQL Solution
+## SQL Solution
 
 ```sql
 SELECT e.name AS Employee
@@ -47,7 +47,7 @@ WHERE e.salary > m.salary;
 
 ---
 
-## 🔎 Example
+## Example
 
 ### Input
 
@@ -66,20 +66,20 @@ WHERE e.salary > m.salary;
 
 ---
 
-## ⚡ Complexity Analysis
+## Complexity Analysis
 
 * **Time Complexity:** O(n) (single join scan)
 * **Space Complexity:** O(1)
 
 ---
 
-## 🏁 Key Insight
+## Key Insight
 
 This is a classic **self-join problem**, where a table is joined with itself to compare hierarchical relationships.
 
 ---
 
-## 📌 Tags
+## Tags
 
 * SQL
 * Joins

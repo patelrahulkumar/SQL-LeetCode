@@ -1,6 +1,6 @@
 # 175. Combine Two Tables
 
-## 🧩 Problem Statement
+## Problem Statement
 
 Given two tables `Person` and `Address`, combine them to report each person's first name, last name, city, and state.
 
@@ -8,7 +8,7 @@ If a person does not have an address, return `NULL` for city and state.
 
 ---
 
-## 🗂️ Table Schema
+## Table Schema
 
 ### Person
 
@@ -29,7 +29,7 @@ If a person does not have an address, return `NULL` for city and state.
 
 ---
 
-## 🎯 Objective
+## Objective
 
 Return:
 
@@ -42,7 +42,7 @@ Include all persons, even if they do not have an address.
 
 ---
 
-## 💡 Approach
+## Approach
 
 We use a **LEFT JOIN**:
 
@@ -52,7 +52,7 @@ We use a **LEFT JOIN**:
 
 ---
 
-## 🛠️ SQL Solution
+## SQL Solution
 
 ```sql id="x7v4lm"
 SELECT 
@@ -67,7 +67,7 @@ ON p.personId = a.personId;
 
 ---
 
-## 🔎 Example
+## Example
 
 ### Input
 
@@ -96,14 +96,14 @@ ON p.personId = a.personId;
 
 ---
 
-## ⚡ Complexity Analysis
+## Complexity Analysis
 
 * **Time Complexity:** O(n) (single join)
 * **Space Complexity:** O(1)
 
 ---
 
-## 🏁 Key Insight
+## Key Insight
 
 Use **LEFT JOIN** when:
 
@@ -112,7 +112,7 @@ Use **LEFT JOIN** when:
 
 ---
 
-## 📌 Tags
+## Tags
 
 * SQL
 * Joins

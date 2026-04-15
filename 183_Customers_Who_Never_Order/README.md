@@ -1,6 +1,6 @@
-# 🧾 Customers Who Never Order (LeetCode 183)
+# Customers Who Never Order (LeetCode 183)
 
-## 📌 Problem Statement
+## Problem Statement
 
 Given two tables:
 
@@ -24,7 +24,7 @@ Given two tables:
 
 ---
 
-## 🎯 Objective
+## Objective
 
 Find all customers who **never placed any orders**.
 
@@ -32,19 +32,19 @@ Return the result in any order.
 
 ---
 
-## 🧠 Approach
+## Approach
 
 The problem is essentially about identifying records in one table that **do not exist** in another table.
 
-### ✅ Key Idea:
+### Key Idea:
 
 Use a **LEFT JOIN** and filter out rows where no matching record exists in the `Orders` table.
 
 ---
 
-## 💡 SQL Solution
+## SQL Solution
 
-### 🔹 Method 1: LEFT JOIN (Recommended)
+### Method 1: LEFT JOIN (Recommended)
 
 ```sql
 SELECT c.name AS Customers
@@ -56,7 +56,7 @@ WHERE o.customerId IS NULL;
 
 ---
 
-### 🔹 Method 2: NOT EXISTS (Efficient & Safe)
+### Method 2: NOT EXISTS (Efficient & Safe)
 
 ```sql
 SELECT name AS Customers
@@ -70,7 +70,7 @@ WHERE NOT EXISTS (
 
 ---
 
-### 🔹 Method 3: NOT IN
+### Method 3: NOT IN
 
 ```sql
 SELECT name AS Customers
@@ -80,11 +80,11 @@ WHERE id NOT IN (
 );
 ```
 
-⚠️ *Note:* `NOT IN` can fail if the subquery contains `NULL`.
+*Note:* `NOT IN` can fail if the subquery contains `NULL`.
 
 ---
 
-## 📊 Example
+## Example
 
 ### Input:
 
@@ -115,7 +115,7 @@ Max
 
 ---
 
-## 📚 Concepts Covered
+## Concepts Covered
 
 * SQL Joins (LEFT JOIN)
 * NULL Handling (`IS NULL`)
@@ -125,7 +125,7 @@ Max
 
 ---
 
-## 🚀 Key Takeaways
+## Key Takeaways
 
 * Use **LEFT JOIN + IS NULL** to find unmatched records.
 * Prefer **NOT EXISTS** for better reliability.
@@ -133,25 +133,19 @@ Max
 
 ---
 
-## 🏁 Complexity
+## Complexity
 
 * Time Complexity: `O(N + M)`
 * Space Complexity: `O(1)` (excluding result set)
 
 ---
 
-## 🔥 Interview Tip
+## Tags
 
-This is a classic **Anti-Join** problem.
-You should immediately think of:
-
-* `LEFT JOIN + IS NULL`
-* `NOT EXISTS`
-
----
-
-## 📎 Tags
-
-`SQL` `Joins` `Subqueries` `Database` `Easy`
+`SQL`
+`Joins`
+`Subqueries`
+`Database`
+`Easy`
 
 ---
