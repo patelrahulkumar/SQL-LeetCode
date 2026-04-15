@@ -1,4 +1,4 @@
-# 182. Duplicate Emails (SQL)
+# 182. Duplicate Emails
 
 ## Problem Statement
 

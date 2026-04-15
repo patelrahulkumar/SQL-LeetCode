@@ -1,4 +1,4 @@
-# Customers Who Never Order (LeetCode 183)
+# 183. Customers Who Never Order
 
 ## Problem Statement
 
