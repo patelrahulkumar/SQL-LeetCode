@@ -1,37 +1,47 @@
-# 182. Duplicate Emails
+# Duplicate Emails (LeetCode 182)
 
 ## Problem Statement
 
 Given a table `Person` with the following schema:
+
+### **Person**
 
 | Column Name | Type    |
 | ----------- | ------- |
 | id          | int     |
 | email       | varchar |
 
-* `id` is the primary key.
-* Each row contains an email address.
-* Emails are guaranteed to be non-null.
+* `id` is the **primary key**
+* Each row contains an email address
+* Emails are **non-null**
 
-### Task
+---
 
-Write a SQL query to find all **duplicate emails** (emails that appear more than once).
+## Objective
+
+Find all **duplicate emails**, i.e., email addresses that appear **more than once**.
+
+Return the result in any order.
 
 ---
 
 ## Approach
 
-To solve this problem, we use:
+This problem focuses on identifying repeated values using SQL aggregation.
 
-* **GROUP BY** → to group identical emails
-* **COUNT()** → to count occurrences of each email
-* **HAVING** → to filter groups with count greater than 1
+### Core Strategy:
+
+* Use **GROUP BY** to cluster identical emails
+* Use **COUNT()** to measure frequency
+* Use **HAVING** to filter duplicates
 
 ---
 
-## SQL Solution
+## SQL Solutions
 
-```sql
+### Method 1: GROUP BY + HAVING (Recommended ⭐)
+
+```sql id="g7h2ks"
 SELECT email AS Email
 FROM Person
 GROUP BY email
@@ -40,11 +50,31 @@ HAVING COUNT(email) > 1;
 
 ---
 
+### Method 2: Self Join (Alternative)
+
+```sql id="n2kd9q"
+SELECT DISTINCT p1.email AS Email
+FROM Person p1
+JOIN Person p2
+ON p1.email = p2.email
+AND p1.id <> p2.id;
+```
+
+---
+
 ## Explanation
 
-1. `GROUP BY email` groups all identical emails together.
-2. `COUNT(email)` calculates how many times each email appears.
-3. `HAVING COUNT(email) > 1` filters only those emails that occur more than once.
+### GROUP BY Approach:
+
+1. `GROUP BY email` → Groups identical emails together
+2. `COUNT(email)` → Counts occurrences of each email
+3. `HAVING COUNT(email) > 1` → Filters only duplicates
+
+### Self Join Approach:
+
+* Joins the table with itself
+* Matches rows with same email but different IDs
+* `DISTINCT` ensures unique output
 
 ---
 
@@ -58,50 +88,50 @@ HAVING COUNT(email) > 1;
 | 2  | [c@d.com](mailto:c@d.com) |
 | 3  | [a@b.com](mailto:a@b.com) |
 
-### Output
-
-| Email                     |
-| ------------------------- |
-| [a@b.com](mailto:a@b.com) |
-
 ---
 
-## Alternative Solution (Self Join)
+### Output
 
-```sql
-SELECT DISTINCT p1.email AS Email
-FROM Person p1
-JOIN Person p2
-ON p1.email = p2.email AND p1.id <> p2.id;
+```id="r9sk2m"
+a@b.com
 ```
 
 ---
 
-## Key Concepts
+## Concepts Covered
 
 * SQL Aggregation
 * GROUP BY
 * HAVING clause
+* Self Join
 * Duplicate detection
 
 ---
 
-## Complexity
+## Key Takeaways
 
-* Time Complexity: O(n)
-* Space Complexity: O(n) (depends on grouping)
-
----
-
-## Notes
-
-* Preferred approach is **GROUP BY + HAVING** for clarity and performance.
-* Self join is less efficient but useful for conceptual understanding.
+* Use **GROUP BY + HAVING** for clean and efficient duplicate detection
+* `HAVING` is used with aggregated results (not `WHERE`)
+* Self joins help understand relational comparisons
 
 ---
 
-## Conclusion
+## Complexity Analysis
 
-This is a fundamental SQL problem that tests your understanding of grouping and filtering aggregated data. It is commonly asked in interviews.
+| Metric           | Value                      |
+| ---------------- | -------------------------- |
+| Time Complexity  | O(n)                       |
+| Space Complexity | O(n) (depends on grouping) |
+
+---
+
+## Tags
+
+* `SQL`
+* `Aggregation`
+* `GROUP BY`
+* `HAVING`
+* `Database`
+* `Easy`
 
 ---

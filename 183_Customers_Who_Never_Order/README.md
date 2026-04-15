@@ -142,10 +142,10 @@ Max
 
 ## Tags
 
-`SQL`
-`Joins`
-`Subqueries`
-`Database`
-`Easy`
+* `SQL`
+* `Joins`
+* `Subqueries`
+* `Database`
+* `Easy`
 
 ---
