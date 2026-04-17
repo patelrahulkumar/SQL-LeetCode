@@ -141,6 +141,10 @@ Mastering this helps in:
 
 ## Tags
 
-`SQL` `Self Join` `Window Function` `Date Handling` `Easy`
+* `SQL`
+* `Self Join`
+* `Window Function`
+* `Date Handling`
+* `Easy`
 
 ---
