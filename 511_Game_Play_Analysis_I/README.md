@@ -1,17 +1,21 @@
 # Game Play Analysis I
 
-## Problem Overview
+## Problem Statement
 
-You are given a table `Activity` that records the login activity of players in a game.
+Given a table `Activity` with the following schema:
 
-Each record contains:
+### **Activity**
 
-* `player_id` → Unique ID of the player
-* `device_id` → Device used for login
-* `event_date` → Date of login
-* `games_played` → Number of games played that day
+| Column Name  | Type |
+| ------------ | ---- |
+| player_id    | int  |
+| device_id    | int  |
+| event_date   | date |
+| games_played | int  |
 
-A player may have multiple records across different dates.
+* `(player_id, event_date)` is the **primary key**
+* Each row represents a player's login activity
+* A player may log in multiple times on different dates
 
 ---
 
@@ -21,17 +25,25 @@ Find the **first login date** for each player.
 
 ---
 
-## Approach
+## Intuition
 
-To solve this problem:
+This is a **group-wise minimum problem** where we need to:
 
 1. Group records by `player_id`
-2. For each player, find the **minimum `event_date`**
-3. Return the result as `first_login`
+2. Identify the **earliest (`MIN`) event_date**
+3. Return that as the first login
+
+In short:
+
+> For each player → find their earliest activity date
 
 ---
 
 ## SQL Solution
+
+---
+
+### Method 1: GROUP BY + MIN (Optimal)
 
 ```sql
 SELECT 
@@ -40,6 +52,33 @@ SELECT
 FROM Activity
 GROUP BY player_id;
 ```
+
+#### Explanation:
+
+* `GROUP BY player_id` → creates groups for each player
+* `MIN(event_date)` → finds earliest login date
+* Returns one row per player
+
+---
+
+### Method 2: Window Function (Alternative)
+
+```sql
+SELECT player_id, event_date AS first_login
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY event_date) AS rn
+    FROM Activity
+) t
+WHERE rn = 1;
+```
+
+#### Explanation:
+
+* `PARTITION BY player_id` → groups players
+* `ORDER BY event_date` → sorts login dates
+* `ROW_NUMBER()` → assigns rank
+* Keep only the first login (`rn = 1`)
 
 ---
 
@@ -67,41 +106,30 @@ GROUP BY player_id;
 
 ---
 
-## Concepts Used
+## Concepts Covered
 
-* SQL Aggregation
+* Aggregation in SQL
 * `GROUP BY`
 * Aggregate Function: `MIN()`
+* Window Functions (`ROW_NUMBER`)
+* Partitioning Data
 
 ---
 
-## Key Takeaway
+## Key Insights
 
-This is a classic example of:
-
-> Finding **earliest record per group** using `GROUP BY` and `MIN()`
-
----
-
-## Alternative Approach (Window Function)
-
-```sql
-SELECT player_id, event_date AS first_login
-FROM (
-    SELECT *,
-           ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY event_date) AS rn
-    FROM Activity
-) t
-WHERE rn = 1;
-```
+* Use **MIN()** to find earliest values
+* `GROUP BY` simplifies per-entity calculations
+* Window functions help when more row-level data is needed
 
 ---
 
-## Use Cases
+## Complexity Analysis
 
-* First login tracking
-* Customer onboarding analysis
-* User behavior analytics
+| Metric           | Value |
+| ---------------- | ----- |
+| Time Complexity  | O(n)  |
+| Space Complexity | O(1)  |
 
 ---
 
@@ -109,7 +137,16 @@ WHERE rn = 1;
 
 * `SQL`
 * `Aggregation`
-* `Group By`
-* `LeetCode Easy`
+* `GROUP BY`
+* `Window Functions`
+* `Easy`
+
+---
+
+## Use Cases
+
+* First login tracking
+* User onboarding analytics
+* Retention analysis
 
 ---
